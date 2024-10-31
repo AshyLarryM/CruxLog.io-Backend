@@ -5,14 +5,14 @@ import { users } from '@/drizzle/schema';
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { clerkUserId, email } = body;
+        const { userId, email } = body;
 
-        if (!clerkUserId || !email) {
+        if (!userId || !email) {
             return NextResponse.json({ message: "Missing Required Fields to Create User" }, { status: 400 });
         }
 
         const newUser = await db.insert(users).values({
-            clerkUserId,
+            userId,
             email,
         });
 
