@@ -1,15 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { db } from '@/drizzle/db';
 import { users } from '@/drizzle/schema';
 
-export async function POST(req: NextRequest) {
-    console.log("Received request to create user");
-
+export async function POST(req: Request) {
     try {
-        
         const body = await req.json();
-        console.log("Parsed body:", body);
-
         const { clerkUserId, email } = body;
 
         if (!clerkUserId || !email) {
