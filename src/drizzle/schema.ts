@@ -1,4 +1,4 @@
-import { integer, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, numeric, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 import { pgTable, serial, primaryKey } from 'drizzle-orm/pg-core';
 
 
@@ -21,7 +21,12 @@ export const users = pgTable('users', {
     email: varchar('email', { length: 255 }).notNull().unique(),
     fullName: varchar('full_name', { length: 255 }),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
-    // TODO: Preferred Grading system implementation.
+    age: integer('age'),
+    height: numeric('height'),
+    weight: numeric('weight'),
+    apeIndex: numeric('ape_index'),
+    gradingPreference: boolean('grading_preference').notNull().default(false), // to enable french grading user must change to true.
+    measurementSystem: boolean('measurement_system').notNull().default(false), // to enable metric, user must change to true. 
 });
 
 export const session = pgTable('session', {
