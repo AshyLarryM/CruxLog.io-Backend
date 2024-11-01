@@ -8,6 +8,20 @@
       "when": 1730428349636,
       "tag": "0000_curly_shadowcat",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1730481629206,
+      "tag": "0001_noisy_lyja",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1730482034644,
+      "tag": "0002_slow_ma_gnuci",
+      "breakpoints": true
     }
   ]
 }
