@@ -3,16 +3,16 @@ import { pgTable, serial, primaryKey } from 'drizzle-orm/pg-core';
 
 
 export enum ClimbTypeEnum  {
-    TOP_ROPE = 'top rope',
-    LEAD = 'lead',
-    BOULDER = 'boulder',
+    TOP_ROPE = 'Top Rope',
+    LEAD = 'Boulder',
+    BOULDER = 'Lead',
 }
 
 export enum ClimbStyleEnum {
-    SLAB = 'slab',
-    VERTICAL= 'verical',
-    OVERHANG = 'overhang',
-    CAVE = 'cave',
+    SLAB = 'Slab',
+    VERTICAL = 'Vertical',
+    OVERHANG = 'Overhang',
+    CAVE = 'Cave',
 }
 
 export const users = pgTable('users', {
@@ -39,9 +39,11 @@ export const session = pgTable('session', {
 
 export const climb = pgTable('climb', {
     id: serial('id').primaryKey(),
+    name: varchar('name', { length: 50 }).notNull(),
     sessionId: integer('session_id').notNull().references(() => session.id),
     type: varchar('type', { length: 50 }).notNull(),
     style: varchar('style', { length: 50 }).notNull(),
     grade: varchar('grade', { length: 50 }).notNull(),
     attempts: integer('attempts').notNull().default(1),
+    send: boolean('send').notNull().default(false),
 })
