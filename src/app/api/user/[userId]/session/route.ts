@@ -69,6 +69,33 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
         return NextResponse.json({ message: "Active Session Found", session: userSession, climbs: climbs }, { status: 200 })
     } catch (error) {
         console.error("Error fetching session and Climbs: ", error);
-        return NextResponse.json({ message: "failed to fetch session and climbs: ", error}, { status: 500 });
+        return NextResponse.json({ message: "failed to fetch session and climbs: ", error }, { status: 500 });
+    }
+}
+
+export async function PATCH(req: NextRequest, { params }: { params: { userId: string } }) {
+    revalidatePath(req.url);
+
+    try {
+        const { userId } = params;
+
+        const { sessionName, intensity, notes, completed } = await req.json();
+
+        const [user] = await db.select().from(users).where(eq(users.userId, userId));
+        if (!user) {
+            return NextResponse.json({ message: "User does not exist" }, { status: 400 });
+        }
+
+        const [userSession] = await db.select().from(session).where(and(eq(session.userId, userId), eq(session.completed, false))).orderBy(desc(session.createdAt)).limit(1);
+
+        if (!userSession) {
+            return NextResponse.json({ message: "No Active Session Found" });
+        }
+
+        const updatedSession = await db.update(session).set({ sessionName, intensity, notes, completed }).where(eq(session.id, userSession.id)).returning();
+        return NextResponse.json({ message: "Session Updated Successfully", session: updatedSession }, { status: 200 });
+    } catch (error) {
+        console.error("Error updating session: ", error);
+        return NextResponse.json({ message: "Failed to update session", error }, { status: 500 })
     }
 }
