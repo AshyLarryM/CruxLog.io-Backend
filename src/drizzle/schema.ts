@@ -32,9 +32,11 @@ export const users = pgTable('users', {
 export const session = pgTable('session', {
     id: serial('id').primaryKey(),
     userId: varchar('user_id', { length: 255 }).notNull().references(() => users.userId),
+    sessionName: varchar('session_name', { length: 50 }),
     intensity: integer('intensity').notNull(),
     notes: text('notes'),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+    completed: boolean('completed').notNull().default(false),
 });
 
 export const climb = pgTable('climb', {
