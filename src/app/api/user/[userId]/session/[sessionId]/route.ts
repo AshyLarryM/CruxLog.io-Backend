@@ -42,5 +42,8 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
             };
         });
 
-        return NextResponse.json({ climbs: transformedClimbs });
+        return NextResponse.json({ 
+            message: `Climbs successfully fetched for sessionId: ${sessionIdNumber}`, 
+            climbs: transformedClimbs 
+        });
 }
