@@ -50,7 +50,6 @@ export async function POST(req: NextRequest, { params }: { params: { userId: str
 
 
 export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
-    console.time("Route Execution Time");
     revalidatePath(req.url);
 
     try {
