@@ -46,24 +46,22 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                     .filter(climb => climb.send === true && (climb.type === "Top Rope" || climb.type === "Lead"))
                     .map(climb => climb.grade);
 
-                const highestRouteGrade = completedRoutes.length > 0 ? completedBoulders.reduce((max, grade) => {
+                const highestRouteGrade = completedRoutes.length > 0 ? completedRoutes.reduce((max, grade) => {
                     return routeGradeMapping[grade] > routeGradeMapping[max] ? grade : max;
                 }, completedRoutes[0]) : null;
 
                 const displayedBoulderGrade = gradingPreference && highestBoulderGrade ? boulderGradeMapping[highestBoulderGrade] : highestBoulderGrade;
                 const displayedRouteGrade = gradingPreference && highestRouteGrade ? routeGradeMapping[highestRouteGrade] : highestRouteGrade;
 
-
                 const totalBouldersCompleted = climbs.filter(climb => climb.send === true && climb.type === "Boulder").length;
-                const totalRoutesCompleted = climbs.filter(climb => climb.send === true && (climb.type === "Top Rope" || "Lead")).length;
+                const totalRoutesCompleted = climbs.filter(climb => climb.send === true && (climb.type === "Top Rope" || climb.type === "Lead")).length;
                 const totalSends = climbs.filter(climb => climb.send === true).length;
-                const totalAttempts = climbs.filter(climb => climb.attempts).length;
+                const totalAttempts = climbs.reduce((acc, climb) => acc + (climb.attempts || 0), 0);
                 const totalFlashes = climbs.filter(climb => climb.attempts === 1 && climb.send === true).length;
 
                 return {
                     ...userSession,
-                    climbs,
-                    stats: {
+                    sessionStats: {
                         highestBoulderGrade: displayedBoulderGrade,
                         highestRouteGrade: displayedRouteGrade,
                         totalClimbs: climbs.length,
