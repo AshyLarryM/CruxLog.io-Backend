@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
+
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest, { params }: { params: { userId: string } }) {
@@ -46,7 +47,9 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
 
         const body = await req.json();
 
+
         const { fullName, age, height, weight, apeIndex, gradingPreference, measurementSystem, profileImage } = body;
+
 
         const updatedProfileFields = {
             ...(fullName !== undefined && { fullName }),
@@ -60,6 +63,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
         };
 
         console.log("Updating user profile with fields:", updatedProfileFields);
+        };
 
 
         if (Object.keys(updatedProfileFields).length === 0) {

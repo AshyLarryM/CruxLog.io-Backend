@@ -9,10 +9,10 @@ export enum ClimbTypeEnum  {
 }
 
 export enum ClimbStyleEnum {
-    SLAB = 'Slab',
-    VERTICAL = 'Vertical',
-    OVERHANG = 'Overhang',
-    CAVE = 'Cave',
+    SLAB = 'slab',
+    VERTICAL= 'verical',
+    OVERHANG = 'overhang',
+    CAVE = 'cave',
 }
 
 export const users = pgTable('users', {
@@ -28,6 +28,7 @@ export const users = pgTable('users', {
     gradingPreference: boolean('grading_preference').notNull().default(false), // to enable french grading user must change to true.
     measurementSystem: boolean('measurement_system').notNull().default(false), // to enable metric, user must change to true. 
     profileImage: varchar('profile_image', { length: 512 })
+
 });
 
 export const session = pgTable('session', {
@@ -38,6 +39,9 @@ export const session = pgTable('session', {
     notes: text('notes'),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
     completed: boolean('completed').notNull().default(false),
+    intensity: integer('intensity').notNull(),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
 });
 
 export const climb = pgTable('climb', {
