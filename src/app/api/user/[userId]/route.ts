@@ -36,14 +36,6 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
 }
 
 
-// const s3Client = new S3Client({
-//     region: process.env.AWS_S3_REGION as string,
-//     credentials: {
-//         accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID as string,
-//         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
-//     }
-// });
-
 export async function PATCH(req: NextRequest, { params }: { params: { userId: string } }) {
     try {
         const { userId } = params;
@@ -54,7 +46,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
 
         const body = await req.json();
 
-        const { fullName, age, height, weight, apeIndex, gradingPreference, measurementSystem } = body;
+        const { fullName, age, height, weight, apeIndex, gradingPreference, measurementSystem, profileImage } = body;
 
         const updatedProfileFields = {
             ...(fullName !== undefined && { fullName }),
@@ -64,7 +56,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
             ...(apeIndex !== undefined && { apeIndex }),
             ...(gradingPreference !== undefined && { gradingPreference }),
             ...(measurementSystem !== undefined && { measurementSystem }),
+            ...(profileImage !== undefined && { profileImage}),
         };
+
+        console.log("Updating user profile with fields:", updatedProfileFields);
+
 
         if (Object.keys(updatedProfileFields).length === 0) {
             return NextResponse.json({ message: "No valid fields provided for update" }, { status: 400 });
