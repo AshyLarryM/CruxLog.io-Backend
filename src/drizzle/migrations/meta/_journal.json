@@ -22,6 +22,41 @@
       "when": 1730482034644,
       "tag": "0002_slow_ma_gnuci",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1731003028084,
+      "tag": "0003_mysterious_umar",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1731012584295,
+      "tag": "0004_common_red_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1731094916076,
+      "tag": "0005_solid_the_professor",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1731182284120,
+      "tag": "0006_certain_logan",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1731466906795,
+      "tag": "0007_faithful_sugar_man",
+      "breakpoints": true
     }
   ]
 }

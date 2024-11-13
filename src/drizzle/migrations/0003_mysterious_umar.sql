@@ -1,0 +1,1 @@
+ALTER TABLE "climb" ADD COLUMN "name" varchar(50) NOT NULL;

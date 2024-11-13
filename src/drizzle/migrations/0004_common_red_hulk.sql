@@ -1,0 +1,1 @@
+ALTER TABLE "climb" ADD COLUMN "send" boolean DEFAULT false NOT NULL;
