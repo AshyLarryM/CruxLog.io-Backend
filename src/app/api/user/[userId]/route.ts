@@ -63,8 +63,6 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
         };
 
         console.log("Updating user profile with fields:", updatedProfileFields);
-        };
-
 
         if (Object.keys(updatedProfileFields).length === 0) {
             return NextResponse.json({ message: "No valid fields provided for update" }, { status: 400 });

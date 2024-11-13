@@ -39,9 +39,6 @@ export const session = pgTable('session', {
     notes: text('notes'),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
     completed: boolean('completed').notNull().default(false),
-    intensity: integer('intensity').notNull(),
-    notes: text('notes'),
-    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
 });
 
 export const climb = pgTable('climb', {
