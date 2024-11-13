@@ -27,6 +27,7 @@ export const users = pgTable('users', {
     apeIndex: numeric('ape_index'),
     gradingPreference: boolean('grading_preference').notNull().default(false), // to enable french grading user must change to true.
     measurementSystem: boolean('measurement_system').notNull().default(false), // to enable metric, user must change to true. 
+    profileImage: varchar('profile_image', { length: 512 })
 });
 
 export const session = pgTable('session', {

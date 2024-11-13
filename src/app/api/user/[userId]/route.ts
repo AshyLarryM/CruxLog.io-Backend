@@ -3,6 +3,8 @@ import { db } from '@/drizzle/db';
 import { users } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,6 +34,15 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
         return NextResponse.json({ message: "Server Error Fetching User Data" }, { status: 500 });
     }
 }
+
+
+// const s3Client = new S3Client({
+//     region: process.env.AWS_S3_REGION as string,
+//     credentials: {
+//         accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID as string,
+//         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+//     }
+// });
 
 export async function PATCH(req: NextRequest, { params }: { params: { userId: string } }) {
     try {
