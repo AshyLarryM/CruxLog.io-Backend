@@ -1,0 +1,1 @@
+ALTER TABLE "climb" ADD COLUMN "climb_image" varchar(512);

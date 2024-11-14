@@ -50,4 +50,5 @@ export const climb = pgTable('climb', {
     grade: varchar('grade', { length: 50 }).notNull(),
     attempts: integer('attempts').notNull().default(1),
     send: boolean('send').notNull().default(false),
+    climbImage: varchar('climb_image', { length: 512 }),
 })

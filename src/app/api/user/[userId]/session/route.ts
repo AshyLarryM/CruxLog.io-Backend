@@ -10,7 +10,7 @@ export async function POST(req: NextRequest, { params }: { params: { userId: str
 
     try {
         const { userId } = params;
-        const { name, type, style, grade, attempts, send } = await req.json();
+        const { name, type, style, grade, attempts, send, climbImage } = await req.json();
 
         const [user] = await db.select().from(users).where(eq(users.userId, userId))
 
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest, { params }: { params: { userId: str
             grade,
             attempts,
             send,
+            climbImage,
         };
 
         await db.insert(climb).values(newClimb)
