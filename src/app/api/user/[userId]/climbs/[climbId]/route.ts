@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/drizzle/db';
-import { climb, session, users } from "@/drizzle/schema";
-import { eq, and, desc } from "drizzle-orm";
+import { climb } from "@/drizzle/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export async function PATCH(req: NextRequest, { params }: { params: { userId: string; climbId: string } }) {
