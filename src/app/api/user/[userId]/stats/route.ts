@@ -52,7 +52,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
             .limit(1);
 
         const transformedGrades = {
-            Boulder: highestBoulderGrade[0]
+            boulder: highestBoulderGrade[0]
                 ? {
                     ...highestBoulderGrade[0],
                     grade: gradingPreference
@@ -60,7 +60,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                         : highestBoulderGrade[0].grade,
                 }
                 : null,
-            Route: highestRouteGrade[0]
+            route: highestRouteGrade[0]
                 ? {
                     ...highestRouteGrade[0],
                     grade: gradingPreference
@@ -71,7 +71,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                 : null,
         };
 
-        return NextResponse.json({ message: `User: ${userId} grades fetched`, userGrades: transformedGrades }, { status: 200 });
+        return NextResponse.json({ message: `User: ${userId} grades fetched`, userHardestGrades: transformedGrades }, { status: 200 });
     } catch (error) {
         console.error("Error fetching user grades: ", error);
         return NextResponse.json({ message: "An error occurred", error: error }, { status: 500 });
