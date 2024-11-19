@@ -12,7 +12,7 @@ const s3Client = new S3Client({
 
 export async function POST(req: NextRequest, { params }: { params: { userId: string; climbId: string } }) {
 
-    if (!process.env.S3_BUCKET_NAME) {
+    if (!process.env.AWS_S3_BUCKET_NAME) {
         throw new Error("S3_BUCKET_NAME environment variable is not set.");
     }
 
