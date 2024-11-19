@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: { userId: str
     try {
         const { userId, climbId } = params;
 
-        if (!userId && climbId) {
+        if (!userId && !climbId) {
             return NextResponse.json({ message: "userId and climbId is required" }, { status: 400 });
         }
 
