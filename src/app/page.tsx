@@ -76,7 +76,7 @@ export default function Home() {
 					</li>
 					<li>
 						<strong>Hosting Provider:</strong> Your data is securely stored on
-						our backend, hosted on [Insert Hosting Provider].
+						our backend, hosted on Insert Hosting Provider.
 					</li>
 				</ul>
 
@@ -121,8 +121,7 @@ export default function Home() {
 					data practices, you can contact us at:
 				</p>
 				<ul className="list-none pl-0 mb-4">
-					<li>Email: [Insert Support Email]</li>
-					<li>Address: [Insert Address, if applicable]</li>
+					<li>Email: cruxlog.io@gmail.com</li>
 				</ul>
 			</div>
 		</div>
