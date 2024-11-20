@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from '@/drizzle/db';
-import { users } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
+import { climb, session, users } from "@/drizzle/schema";
+import { eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { clerkClient } from "@clerk/nextjs/server";
 
 
 export const dynamic = 'force-dynamic';
@@ -59,7 +58,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
             ...(apeIndex !== undefined && { apeIndex }),
             ...(gradingPreference !== undefined && { gradingPreference }),
             ...(measurementSystem !== undefined && { measurementSystem }),
-            ...(profileImage !== undefined && { profileImage}),
+            ...(profileImage !== undefined && { profileImage }),
         };
 
         console.log("Updating user profile with fields:", updatedProfileFields);
@@ -83,5 +82,46 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
     } catch (error) {
         console.error("Error updating user data:", error);
         return NextResponse.json({ message: "Server Error Updating User Data" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: { userId: string } }) {
+    const { userId } = params;
+
+    if (!userId) {
+        return NextResponse.json({ message: "userId is required" }, { status: 400 });
+    }
+
+    try {
+        const userSessions = await db
+            .select({ id: session.id })
+            .from(session)
+            .where(eq(session.userId, userId));
+
+        const sessionIds = userSessions.map((s) => s.id);
+
+        if (sessionIds.length > 0) {
+            await db.delete(climb).where(inArray(climb.sessionId, sessionIds));
+        }
+
+        await db.delete(session).where(eq(session.userId, userId));
+
+        const deletedUsers = await db.delete(users).where(eq(users.userId, userId)).returning();
+        if (deletedUsers.length === 0) {
+            return NextResponse.json({ message: "User not found in the database" }, { status: 404 });
+        }
+
+        try {
+            const client = await clerkClient()
+            await client.users.deleteUser(userId)
+            return NextResponse.json({ message: 'User deleted' })
+        } catch (clerkError) {
+            console.error("Failed to delete Clerk user:", clerkError);
+        }
+
+        return NextResponse.json({ message: "User and all related data deleted successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        return NextResponse.json({ message: "Failed to delete user", error: error }, { status: 500 });
     }
 }
