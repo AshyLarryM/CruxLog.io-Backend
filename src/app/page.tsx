@@ -9,10 +9,7 @@ export default function Home() {
 					<strong>Effective Date:</strong> [11/19/2024]
 				</p>
 				<p>
-					CruxLog ("we," "our," or "us") is committed to protecting your
-					privacy. This Privacy Policy explains how we collect, use, disclose,
-					and protect your information when you use our rock climbing logging
-					application ("App") and associated services.
+					{`CruxLog ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your information when you use our rock climbing logging application ("App") and associated services.`}
 				</p>
 				<p>
 					By using CruxLog, you agree to the terms of this Privacy Policy. If
