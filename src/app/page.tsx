@@ -3,7 +3,7 @@ import { PageFrame } from "@/components/layouts/PageFrame";
 
 export default function Home() {
 	return (
-		<PageFrame>
+		<PageFrame showNavbar={true}>
 			<Hero />
 		</PageFrame>
 	);
