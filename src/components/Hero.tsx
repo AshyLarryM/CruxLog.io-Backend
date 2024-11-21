@@ -31,15 +31,16 @@ export function Hero() {
                             <img
                                 src="/assets/historyVerticalSim.png"
                                 alt="Placeholder"
-                                className="h-[85vh] max-h-[85vh] max-w-full object-contain absolute left-[-120px] top-[-5px] transform scale-95 z-0"
+                                className="h-[85vh] max-h-[900px] max-w-full object-contain absolute left-[-120px] top-[-5px] transform scale-95 z-0"
                             />
                             <img
                                 src="/assets/createClimbLeftSim.png"
                                 alt="Placeholder"
-                                className="h-[90vh] max-h-[90vh] max-w-full object-contain relative z-10 transform translate-x-[140px]"
+                                className="h-[90vh] max-h-[950px] max-w-full object-contain relative z-10 transform translate-x-[140px]"
                             />
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
