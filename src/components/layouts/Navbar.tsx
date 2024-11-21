@@ -69,7 +69,7 @@ export function Navbar() {
                             <button
                                 key={item.name}
                                 onClick={item.onClick}
-                                className='py-2 px-4 mr-4 font-semibold text-white  hover:text-blue-200 transition-colors duration-500 ease-in-out'
+                                className='py-2 px-4 mr-4 font-semibold text-white  hover:text-secondary transition-colors duration-500 ease-in-out'
                             >
                                 {item.name}
                             </button>
@@ -77,7 +77,7 @@ export function Navbar() {
                             <Link
                                 key={item.name}
                                 href={item.href || '#'}
-                                className='py-2 px-4 mr-4 font-semibold text-white text-glow hover:text-blue-200 transition-colors duration-500 ease-in-out'
+                                className='py-2 px-4 mr-4 font-semibold text-white text-glow hover:text-secondary transition-colors duration-500 ease-in-out'
                                 onClick={handleLinkClick}
                             >
                                 {item.name}
