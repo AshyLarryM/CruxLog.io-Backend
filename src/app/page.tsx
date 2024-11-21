@@ -6,7 +6,7 @@ export default function Home() {
 					Privacy Policy for CruxLog
 				</h1>
 				<p className="text-sm text-gray-600 mb-4 text-center">
-					<strong>Effective Date:</strong> [11/19/2024]
+					<strong>Effective Date:</strong> [11/20/2024]
 				</p>
 				<p>
 					{`CruxLog ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your information when you use our rock climbing logging application ("App") and associated services.`}
@@ -76,7 +76,7 @@ export default function Home() {
 					</li>
 					<li>
 						<strong>Hosting Provider:</strong> Your data is securely stored on
-						our backend, hosted on Insert Hosting Provider.
+						our backend, hosted on Next.js.
 					</li>
 				</ul>
 
@@ -95,7 +95,7 @@ export default function Home() {
 					</li>
 					<li>
 						<strong>Data Deletion:</strong> You can request to delete your
-						account and all associated data by contacting us.
+						account and all associated data by contacting us, or by deleting in the profile/edit profile tab.
 					</li>
 				</ul>
 
