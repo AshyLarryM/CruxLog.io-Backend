@@ -49,7 +49,7 @@ export function Navbar() {
     }, []);
 
     function renderNavLinks() {
-        
+
         return navigationLinks;
     }
 
@@ -57,8 +57,9 @@ export function Navbar() {
         <header className='flex items-center justify-center h-[75px] w-full z-50 bg-transparent'>
             <div className="relative flex justify-between items-center max-w-screen-xl w-full px-5 z-50">
                 <Link href="/">
-                    <div className="flex items-center cursor-pointer">
-                        <img src="/assets/cruxlogIcon.png" alt="CruxLog" className="md:h-12 h-10 pb-2" />
+                    <div className="flex items-center cursor-pointer space-x-4">
+                        <img src="/assets/cruxlogIcon.png" alt="CruxLog" className="md:h-12 h-10" />
+                        <p className="font-bold text-2xl">CruxLog</p>
                     </div>
                 </Link>
 
