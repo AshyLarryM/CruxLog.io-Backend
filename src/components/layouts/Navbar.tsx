@@ -59,7 +59,7 @@ export function Navbar() {
                 <Link href="/">
                     <div className="flex items-center cursor-pointer space-x-4">
                         <img src="/assets/cruxlogIcon.png" alt="CruxLog" className="md:h-12 h-10" />
-                        <p className="font-bold text-2xl">CruxLog</p>
+                        <p className="font-bold text-4xl bg-gradient-to-b from-bright-yellow via-[#F34971] to-primary-purple bg-clip-text text-transparent">CruxLog</p>
                     </div>
                 </Link>
 
