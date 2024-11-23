@@ -59,7 +59,7 @@ export function Navbar() {
                 <Link href="/">
                     <div className="flex items-center cursor-pointer space-x-4">
                         <img src="/assets/cruxlogIcon.png" alt="CruxLog" className="md:h-12 h-10" />
-                        <p className="font-bold text-4xl bg-gradient-to-b from-bright-yellow via-[#F34971] to-primary-purple bg-clip-text text-transparent">CruxLog</p>
+                        <p className="font-bold text-2xl md:text-4xl bg-gradient-to-b from-bright-yellow via-[#F34971] to-primary-purple bg-clip-text text-transparent">CruxLog</p>
                     </div>
                 </Link>
 
@@ -89,7 +89,7 @@ export function Navbar() {
 
                 <div className="md:hidden absolute top-0 right-0 mr-4" onClick={toggleMenu}>
                     <svg
-                        className={`h-8 w-8 text-white nav-icon ${isMenuOpen ? 'open' : ''}`}
+                        className={`h-8 w-8 text-gray-4 nav-icon ${isMenuOpen ? 'open' : ''}`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -114,7 +114,7 @@ export function Navbar() {
 
                 {/* Drop menu */}
                 {shouldRenderMenu && (
-                    <div className={`absolute w-full top-10 right-0 mt-2 py-2 flex text-white bg-transparent/80 flex-col pb-12 min-h-screen ${isMenuOpen ? 'animate-fade-in' : 'animate-fade-out'}`}>
+                    <div className={`absolute w-full top-10 right-0 mt-2 py-2 flex text-white bg-transparent/80 flex-col pb-12 min-h-screen ${isMenuOpen ? 'block' : 'hidden'}`}>
                         {renderNavLinks().map(item => (
                             item.onClick ? (
                                 <button

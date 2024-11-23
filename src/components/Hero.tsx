@@ -5,7 +5,7 @@ import { FaApple } from "react-icons/fa";
 
 export function Hero() {
     return (
-        <div className="min-h-screen sm:p-4">
+        <div className="min-h-screen p-4 md:p-0">
             <div className="flex justify-center items-center py-1">
                 <div className="flex flex-row w-full 2xl:flex justify-center">
                     <div className="w-1/2 flex justify-center">
