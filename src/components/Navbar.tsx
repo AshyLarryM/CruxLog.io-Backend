@@ -123,29 +123,33 @@ export function Navbar() {
 
                 {/* Drop menu */}
                 {shouldRenderMenu && (
-                    <div className={`absolute w-full top-10 right-0 mt-2 py-2 flex text-white bg-transparent/80 flex-col pb-12 min-h-screen ${isMenuOpen ? 'animate-fade-in' : 'animate-fade-out'}`}>
-                        {renderNavLinks().map(item => (
-                            item.onClick ? (
-                                <button
-                                    key={item.name}
-                                    onClick={item.onClick}
-                                    className='py-6 px-4 mr-4 font-semibold hover:text-bright-green text-center text-lg'
-                                >
-                                    {item.name}
-                                </button>
-                            ) : (
-                                <Link
-                                    key={item.name}
-                                    href={item.href || '#'}
-                                    className='py-6 px-4 mr-4 font-semibold hover:text-bright-green text-center text-lg'
-                                    onClick={handleLinkClick}
-                                >
-                                    {item.name}
-                                </Link>
-                            )
-                        ))}
-                    </div>
-                )}
+    <div
+        style={{ transition: 'none', animation: 'none' }}
+        className={`absolute w-full top-10 right-0 mt-2 py-2 flex text-white bg-transparent/80 flex-col pb-12 min-h-screen ${isMenuOpen ? 'block' : 'hidden'}`}
+    >
+        {renderNavLinks().map(item => (
+            item.onClick ? (
+                <button
+                    key={item.name}
+                    onClick={item.onClick}
+                    className='py-6 px-4 mr-4 font-semibold hover:text-bright-green text-center text-lg'
+                >
+                    {item.name}
+                </button>
+            ) : (
+                <Link
+                    key={item.name}
+                    href={item.href || '#'}
+                    className='py-6 px-4 mr-4 font-semibold hover:text-bright-green text-center text-lg'
+                    onClick={handleLinkClick}
+                >
+                    {item.name}
+                </Link>
+            )
+        ))}
+    </div>
+)}
+
             </div>
         </header>
     )
