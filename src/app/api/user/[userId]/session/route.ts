@@ -74,6 +74,42 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
         }
         const climbs = await db.select().from(climb).where(eq(climb.sessionId, userSession.id));
 
+        const completedBoulders = climbs.filter(climb => climb.send && climb.type === "Boulder");
+        const completedRoutes = climbs.filter(climb => climb.send && ["Top Rope", "Lead"].includes(climb.type));
+
+        const highestBoulderGrade = completedBoulders.length > 0
+            ? completedBoulders.reduce((max, climb) => (boulderGradeMapping[climb.grade] > boulderGradeMapping[max.grade] ? climb : max)).grade
+            : null;
+
+        const highestRouteGrade = completedRoutes.length > 0
+            ? completedRoutes.reduce((max, climb) => (routeGradeMapping[climb.grade] > routeGradeMapping[max.grade] ? climb : max)).grade
+            : null;
+
+        const displayedBoulderGrade = gradingPreference && highestBoulderGrade
+            ? boulderGradeMapping[highestBoulderGrade]
+            : highestBoulderGrade;
+
+        const displayedRouteGrade = gradingPreference && highestRouteGrade
+            ? routeGradeMapping[highestRouteGrade]
+            : highestRouteGrade;
+
+        const totalBouldersCompleted = completedBoulders.length;
+        const totalRoutesCompleted = completedRoutes.length;
+        const totalSends = climbs.filter(climb => climb.send).length;
+        const totalAttempts = climbs.reduce((acc, climb) => acc + (climb.attempts || 0), 0);
+        const totalFlashes = climbs.filter(climb => climb.send && climb.attempts === 1).length;
+
+        const sessionStats = {
+            highestBoulderGrade: displayedBoulderGrade,
+            highestRouteGrade: displayedRouteGrade,
+            totalClimbs: climbs.length,
+            totalAttempts,
+            completedBoulders: totalBouldersCompleted,
+            completedRoutes: totalRoutesCompleted,
+            totalSends,
+            totalFlashes,
+        };
+
         const transformedClimbs = climbs.map(climb => {
             const gradeMapping = climb.type === "Boulder" ? boulderGradeMapping : routeGradeMapping;
             const grade = gradingPreference ? gradeMapping[climb.grade] : climb.grade;
@@ -84,12 +120,20 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
             };
         });
 
-        return NextResponse.json({ message: "Active Session Found", session: userSession, climbs: transformedClimbs }, { status: 200 });
+        return NextResponse.json({
+            message: "Active Session Found",
+            session: {
+                ...userSession,
+                sessionStats,
+            },
+            climbs: transformedClimbs,
+        }, { status: 200 });
     } catch (error) {
         console.error("Error fetching session and climbs: ", error);
         return NextResponse.json({ message: "Failed to fetch session and climbs", error }, { status: 500 });
     }
 }
+
 
 export async function PATCH(req: NextRequest, { params }: { params: { userId: string } }) {
     revalidatePath(req.url);
