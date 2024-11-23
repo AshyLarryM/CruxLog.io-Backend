@@ -98,7 +98,7 @@ export function Navbar() {
 
                 <div className="md:hidden absolute top-0 right-0 mr-4" onClick={toggleMenu}>
                     <svg
-                        className={`h-8 w-8 text-white nav-icon ${isMenuOpen ? 'open' : ''}`}
+                        className={`h-8 w-8 text-white  ${isMenuOpen ? 'open' : ''}`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
