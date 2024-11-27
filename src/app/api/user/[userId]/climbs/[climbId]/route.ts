@@ -4,7 +4,7 @@ import { climb } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-export async function PATCH(req: NextRequest, { params }: { params: { userId: string; climbId: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: { userId: string, climbId: string } }) {
     revalidatePath(req.url)
 
     const { userId, climbId } = params;
@@ -44,5 +44,28 @@ export async function PATCH(req: NextRequest, { params }: { params: { userId: st
     } catch (error) {
         console.error("Error updating climb data:", error);
         return NextResponse.json({ message: "Server Error Updating Climb Data" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: { userId: string, climbId: string } }) {
+    const { userId, climbId } = params;
+
+    const climbIdNumber = Number(climbId);
+
+    if (isNaN(climbIdNumber)) {
+        return NextResponse.json({ message: "Invalid climbId" }, { status: 400 });
+    }
+
+    try {
+        const climbToDelete = await db.delete(climb).where(eq(climb.id, climbIdNumber)).returning();
+
+        if (!climbToDelete.length) {
+            return NextResponse.json({ message: "Climb not found or delete failed!" }, { status: 404});
+        }
+
+        return NextResponse.json({ message: "Climb deleted successfully", deletedClimb: climbToDelete[0] }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting climb:", error);
+        return NextResponse.json({ message: "Server Error Deleting Climb" }, { status: 500 });
     }
 }
