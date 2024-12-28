@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cruxlog Backend
 
-## Getting Started
+This repository contains the backend for Cruxlog, a workout logger designed for rock climbers. The backend is built with **Next.js**, utilizing the **App Router** for dynamic routing, **Drizzle ORM** for database interaction, and **PostgreSQL** for data storage. Cruxlog enables climbers to log and track their workouts, including bouldering, routes, and top rope climbing sessions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Dynamic Routing**: Routes are dynamically generated for user IDs and climb IDs, enabling personalized and scalable endpoints.
+- **Drizzle ORM**: Simplifies database interactions with a type-safe and developer-friendly interface.
+- **PostgreSQL Database**: Provides a robust and scalable relational database for storing workout logs and user data.
+- **Next.js App Router**: Modern routing approach with file-based routing, server-side rendering, and API routes.
+- **Workout Logger**: Users can log their climbing activities, including:
+  - **Boulders**
+  - **Routes**
+  - **Top Rope**
+- **Authentication**: Supports user-specific data access to ensure secure logging and data management using **Clerk JWT** for authentication.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js
+- **ORM**: Drizzle ORM
+- **Database**: PostgreSQL
+- **Routing**: App Router with dynamic user and climb ID routes
+- **Authentication**: Clerk JWT
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation and Setup
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (>= 16.x)
+- PostgreSQL
+- Yarn or npm
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Steps
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the Repository**
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/yourusername/cruxlog-backend.git
+   cd cruxlog-backend
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install Dependencies**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
+
+3. **Set Up Environment Variables**
+
+   Create a `.env` file in the root directory and configure the following variables:
+
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-publishable-key>
+   CLERK_SECRET_KEY=<your-secret-key>
+   DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
+   AWS_S3_REGION=<your-aws-region>
+   AWS_S3_ACCESS_KEY_ID=<your-access-key-id>
+   AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
+   AWS_S3_BUCKET_NAME=<your-bucket-name>
+   ```
+
+4. **Run Database Migrations**
+
+   Use Drizzle ORM to set up the database schema:
+
+   ```bash
+   yarn db:migrate
+   # or
+   npm run db:migrate
+   ```
+
+5. **Start the Development Server**
+
+   ```bash
+   yarn dev
+   # or
+   npm run dev
+   ```
+
+   The server will run at [http://localhost:3000](http://localhost:3000).
+
+## API Endpoints
+
+### Users
+
+- `GET /api/users`: Retrieve all users.
+- `GET /api/users/[userId]`: Retrieve a specific user by ID.
+
+### Climbs
+
+- `GET /api/users/[userId]/climbs`: Retrieve all climbs for a user.
+- `GET /api/users/[userId]/climbs/[climbId]`: Retrieve a specific climb by ID.
+- `POST /api/users/[userId]/climbs`: Add a new climb.
+- `PUT /api/users/[userId]/climbs/[climbId]`: Update an existing climb.
+- `DELETE /api/users/[userId]/climbs/[climbId]`: Delete a climb.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+- Built with the support of the rock climbing community.
+- Powered by Next.js, Drizzle ORM, PostgreSQL, and Clerk.
+
