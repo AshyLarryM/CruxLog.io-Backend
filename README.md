@@ -1,5 +1,5 @@
-# Cruxlog Backend
-
+# Cruxlog Backend 
+## To download the app head to - https://www.cruxlog.io/
 This repository contains the backend for Cruxlog, a workout logger designed for rock climbers. The backend is built with **Next.js**, utilizing the **App Router** for dynamic routing, **Drizzle ORM** for database interaction, and **PostgreSQL** for data storage. Cruxlog enables climbers to log and track their workouts, including bouldering, routes, and top rope climbing sessions.
 
 ## Features
